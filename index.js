@@ -51,4 +51,50 @@ inquirer
     },
   ])
 
-    
+  .then((answers) => {
+    // Generate the README content
+    const readmeContent = `
+# ${answers.title}
+
+## Description
+${answers.description}
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
+
+## Installation
+${answers.installation}
+
+## Usage
+${answers.usage}
+
+## License
+This application is covered under the ${answers.license} license.
+
+## Contributing
+${answers.contributing}
+
+## Tests
+${answers.tests}
+
+## Questions
+For additional questions, contact ${answers.githubUsername} via [GitHub](https://github.com/${answers.githubUsername}) or email at ${answers.email}.
+`;
+
+    // Write the README file
+    fs.writeFile('README.md', readmeContent, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('README.md generated successfully!');
+      }
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });
